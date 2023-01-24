@@ -1,0 +1,140 @@
+<%- include('../include/admin-header') %>
+    <div class="admin-templates-container" style="min-height: 400px;">
+
+        <div class="d-flex justify-content-end">
+
+            <input id="admin-remove" type="submit" class="btn btn-sm btn-danger text text-white"
+                value="removed saved Templates">
+
+            <div class="btn btn-sm btn-success" id="display-add-templates-form-btn">+ Add Templates</div>
+
+        </div>
+        <div class="admin-message btn btn-md btn-success" style="display: none;width: 300px;"></div>
+        <div class="hide" id="template-form">
+            <div class=" d-flex justify-content-center bg-light p-1 m-1">
+                <form action="/add-template" method="POST" enctype="multipart/form-data" class="add-templates-form ">
+
+                    <div class="d-flex gap-20 justify-content-between flex-direction-column align-items-start  my-1">
+                        <div class="d-flex flex-direction-column align-items-start">
+                            <label for="">Template Name</label>
+                            <input required name="template_name" type="text" placeholder="Template Name"
+                                autocomplete="off" value="" id="template-name" />
+                        </div>
+                        <div class="d-flex flex-direction-column align-items-start">
+                            <label for="">Template Description</label>
+                            <textarea required id="template-description" name="template_description" id="" cols="30"
+                                rows="10"></textarea>
+
+                        </div>
+                        <input type="hidden" name="edit_id" id="edit-id">
+                        <input type="hidden" name="json_file" id="json_file">
+
+
+                        <div class="d-flex flex-direction-column align-items-start custom-file-upload ">
+                            <label for=""> Upload canvas image</label>
+
+                            <input required type="file" name="image" accept='image/*' />
+
+                        </div>
+
+
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <button type="submit" id="" class="btn btn-md btn-dark template-btn">sumbit
+                                Template</button>
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="my-2 d-flex  align-items-start template-container  gap-10" style="width: 100%;">
+            <% data.forEach((data)=>{%>
+
+                <div id="<%= data.template_id %>" class="each-template-container  ">
+
+                    <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
+                        <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
+                        <h3 class="text text-dark title modal-view">
+                            <%= data.template_name %>
+                        </h3>
+                        <p class="description">
+                            <%= data.template_description %>
+
+                        </p>
+                    </div>
+
+
+                </div>
+
+                <% }) %>
+
+
+        </div>
+
+    </div>
+    <div class="modal-template flex-direction-column ">
+        <div style="position:relative">
+
+
+            <div class="modal-header  d-flex justify-content-end">
+                <h3 class="text text-white btn btn-md btn-danger remove-template">Remove</h3>
+                <h3 class="btn btn-md btn-primary edit edit-template">Edit Template</h3>
+
+
+                <h3 class="btn btn-md btn-primary close">Close</h3>
+
+
+            </div>
+            <div class="modal-content">
+
+                <div class="modal-body d-flex  align-items-start gap-10">
+                    <div>
+                        <img class="modal-template-image" width="100%" src="" alt="">
+                    </div>
+                    <div style="width:800px;" class="">
+
+                        <h2 class=" modal-template-title mt-1">
+                        </h2>
+                        <p class="modal-template-description">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("admin-remove").addEventListener("click", () => {
+
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = () => {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    // console.log(xhttp.responseText);
+
+                    let element = document.querySelector('.admin-message')
+                    element.innerHTML = xhttp.responseText
+                    element.style.display = 'block'
+                    document.querySelector('.template-container').innerHTML = ''
+                    setTimeout(() => {
+                        element.style.display = 'none'
+
+                    }, 2000)
+
+                }
+            };
+            xhttp.open(
+                "POST",
+                `http://localhost:5000/remove`,
+                true
+            );
+            xhttp.send();
+        });
+    </script>
+    <%- include('../include/footer') %>

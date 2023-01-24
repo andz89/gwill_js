@@ -1,0 +1,61 @@
+.modal-update {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .modal-content {
+    width: 460px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: 1s;
+    background-color: #f0eded;
+
+  }
+
+
+}
+
+
+
+
+
+
+.close {
+  margin: 3px 0;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background-color: rgb(209, 206, 206);
+  color: #333;
+}
+
+.close:hover,
+.close:focus {
+
+  cursor: pointer;
+  background-color: rgb(179, 176, 176);
+
+  transition: all 0.2s ease-in;
+}
+
+.modal-footer {
+  padding: 5px;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,84 @@
+.admin-templates-container {
+    margin: 10px;
+
+    form {
+
+
+        input[type='text'],
+        input[type='email'],
+        input[type='password'],
+        input[type='date'],
+        select {
+
+            padding: 0 .3rem;
+            font-size: .9rem;
+            border: 1px solid #ccc;
+            background-color: #f0eded;
+            height: 36px;
+            color: #333;
+            width: 500px;
+
+        }
+
+        input:focus {
+            border: 1px solid #048a9e;
+            outline: none;
+            transition: all 0.2s ease-in;
+            border-radius: 5px;
+
+
+        }
+
+        input[type='submit'] {
+            font: inherit;
+        }
+
+        textarea {
+            height: 110px;
+            resize: none;
+            white-space: pre-line;
+            width: 500px;
+            border: 1px solid #ccc;
+        }
+
+        textarea:focus {
+            border: 1px solid #048a9e;
+            outline: none;
+            transition: all 0.2s ease-in;
+            border-radius: 5px;
+        }
+
+
+    }
+
+    label {
+        font-size: .9rem;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    input[type='text'] {
+        background-color: #fff;
+        margin: 0;
+
+    }
+
+
+
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        width: 100%;
+        gap: 5px;
+        font-size: .8rem;
+        padding: 7px 12px;
+        cursor: pointer;
+
+    }
+}

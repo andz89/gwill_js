@@ -1,0 +1,20 @@
+.contact-container{
+    min-height: 500px;
+    max-width: 360px;
+    margin:25px auto ;
+    padding: 0 20px;
+
+
+    .contact-content{
+        padding: 20px;
+        border-radius: 5px;
+        font-size: .9rem;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
+            span{
+                font-size:30px;
+            
+        }
+     
+    }
+}
