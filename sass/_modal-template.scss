@@ -9,60 +9,78 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
   background: rgb(233, 233, 233);
-}
-
-.modal-content {
-
-  margin: 0 auto;
-  width: 100%;
-  animation-name: modalopen;
-  animation-duration: 0.5s;
 
 
 
-}
+  .modal-content {
+    margin: 0 auto;
+    width: 100%;
+    animation-name: modalopen;
+
+    animation-duration: 0.5s;
+
+    .img-container {
+      max-width: 750px;
+
+      img {
+        width: 100%;
+        margin: auto;
+
+      }
+    }
+
+    .template-details {
+      margin: 0 auto;
+      max-width: 750px;
+
+      h2 {
+        margin: 0;
+
+        padding: 0;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
 
 
-
-.modal-header {
-
-  margin-right: 9px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  cursor: pointer;
-  padding: 0 10px;
-
-
-
-
-
-}
-
-.modal-body {
-  padding: 0;
-
-  margin: 0 10px;
-
-}
-
-.close {
-  margin-top: 3px;
-  padding: 3px 5px;
-  border-radius: 5px;
-
-}
-
-
-
-@keyframes modalopen {
-  from {
-    opacity: 0;
   }
 
-  to {
-    opacity: 1;
+
+
+  .modal-header {
+    margin-right: 9px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+
+
+  }
+
+
+
+  .close {
+    margin-top: 3px;
+    padding: 3px 5px;
+    border-radius: 5px;
+
+  }
+
+
+
+  @keyframes modalopen {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 }

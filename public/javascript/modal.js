@@ -37,12 +37,15 @@ class Modal {
 
 
         let title = parent.querySelector('.title').innerText
-        let description = parent.querySelector('.description').innerText
+        let description = parent.querySelector('.description').innerHTML
+        let id  = parent.id
+      
 
 
         document.querySelector('.modal-template-image').src = imgSrc
         document.querySelector('.modal-template-title').innerText = title;
-        document.querySelector('.modal-template-description').innerText = description;
+        document.querySelector('.modal-template-description').innerHTML = description;
+        document.querySelector('.modal-id').value = id;
         document.querySelector('.modal-template').style.display ='flex'
 
 
@@ -54,13 +57,13 @@ class Modal {
       
     })
 
-    document.querySelector('.edit-template').addEventListener('click', function(e){
+    document.querySelector('.edit-template-btn').addEventListener('click', function(e){
       let parent = e.target.parentElement.parentElement;
      
       parent.querySelector('.modal-template-image').src
   let modal_title =  parent.querySelector('.modal-template-title').innerText
-  let modal_description =  parent.querySelector('.modal-template-description').innerText
-  let modal_id = document.querySelector('.each-template-container').id;
+  let modal_description =  parent.querySelector('.modal-template-description').innerHTML;
+  let modal_id = parent.querySelector('.modal-id').value
 
   document.querySelector('.modal-template').style.display ='none'
 
@@ -68,10 +71,11 @@ class Modal {
   document.querySelector("#template-form").classList.add("show");
 
 
-  document.querySelector("#template-description" ).value = modal_description
+  // document.querySelector("#template-description" ).value = modal_description
+  editor.root.innerHTML = modal_description
   document.querySelector("#template-name").value = modal_title
   document.querySelector("#edit-id").value = modal_id
-
+      
 
     })
 }

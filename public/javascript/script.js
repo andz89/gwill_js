@@ -4,6 +4,8 @@ import Update from "./update.js";
 import Loader from "./loader.js";
 import Add_templates from "./add-templates.js";
 
+
+
 let add_templates = new Add_templates();
 add_templates.show_templates_form();
 add_templates.submit_template();
@@ -21,3 +23,7 @@ update.update_account();
 
 let loader = new Loader();
 loader.loading();
+
+
+
+

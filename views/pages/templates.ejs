@@ -10,13 +10,14 @@
 
                     <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
                         <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
+                        <input type="hidden" class="modal-id">
                         <h3 class="text text-dark title modal-view">
                             <%= data.template_name %>
                         </h3>
-                        <p class="description">
-                            <%= data.template_description %>
+                        <div class="hide description">
+                            <%- data.template_description %>
 
-                        </p>
+                        </div>
                     </div>
 
 
@@ -28,31 +29,26 @@
         </div>
 
     </div>
-    <div class="modal-template flex-direction-column ">
-        <div style="position:relative">
+    <div class="modal-template">
+        <div class="modal-header  d-flex justify-content-end">
 
-
-            <div class="modal-header  d-flex justify-content-end">
-                <h3 class="btn btn-md btn-primary close" style="width:100px;text-align: center; font-size:20px;">Close
-                </h3>
-
+            <h3 class="btn btn-md btn-primary close">Close</h3>
+        </div>
+        <div class="modal-content">
+            <div class="modal-body d-flex flex-direction-column ">
+                <div class="img-container">
+                    <img class="modal-template-image" src="" alt="">
+                </div>
 
             </div>
-            <div class="modal-content">
+            <div class="d-flex flex-direction-column align-items-start  template-details px-1">
+                <h2 class=" modal-template-title">
+                </h2>
+                <div class="modal-template-description">
 
-                <div class="modal-body d-flex  align-items-start gap-10">
-                    <div>
-                        <img class="modal-template-image" width="100%" src="" alt="">
-                    </div>
-                    <div style="width:800px;" class="">
-
-                        <h2 class=" modal-template-title mt-1">
-                        </h2>
-                        <p class="modal-template-description">
-
-                        </p>
-                    </div>
                 </div>
+                <input type="hidden" class="modal-id">
+
             </div>
         </div>
     </div>

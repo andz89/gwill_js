@@ -8,6 +8,7 @@ exports.home = (req, res) => {
     user_type: req.session.user.user_role,
   });
 };
+
 exports.contact_page = (req, res) => {
   res.render("pages/contact_page");
 };

@@ -16,9 +16,12 @@ class Add_templates {
     }
   }
   submit_template() {
-   
+    // editor.root.innerHTML;
+    // template-description
     if (document.querySelector("#json-file")) {
+
       document.querySelector("#json-file").addEventListener("change", (e) => {
+    
         var reader = new FileReader();
         reader.onload = (event) => {
           let json = event.target.result;

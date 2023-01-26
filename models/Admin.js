@@ -26,10 +26,12 @@ Admin.prototype.add_template_into_database = function () {
         resolve();
       });
     }else{
+       let a = String(this.data.template_description)
+      console.log(this.data);
 
-      var sql = `UPDATE templates SET template_name ='${this.data.template_name}',template_description ='${this.data.template_description}',canvas_image = '${this.data.file}' WHERE template_id = '${this.data.edit_id}'`;
 
-      
+      var sql = `UPDATE templates SET template_name ='${this.data.template_name}',template_description ='${a}',canvas_image = '${this.data.file}',json_file = '${this.data.file}' WHERE template_id = '${this.data.edit_id}'`;
+
       db.query(sql, (err, result) => {
         if (err) {
           reject(err);

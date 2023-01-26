@@ -1,5 +1,5 @@
 <%- include('../include/admin-header') %>
-    <div class="admin-templates-container" style="min-height: 400px;">
+    <div class="admin-templates-container">
 
         <div class="d-flex justify-content-end">
 
@@ -17,14 +17,20 @@
                     <div class="d-flex gap-20 justify-content-between flex-direction-column align-items-start  my-1">
                         <div class="d-flex flex-direction-column align-items-start">
                             <label for="">Template Name</label>
-                            <input required name="template_name" type="text" placeholder="Template Name"
-                                autocomplete="off" value="" id="template-name" />
+                            <input required name="template_name" type="text" class="bg-white"
+                                placeholder="Template Name" autocomplete="off" value="" id="template-name" />
                         </div>
                         <div class="d-flex flex-direction-column align-items-start">
-                            <label for="">Template Description</label>
-                            <textarea required id="template-description" name="template_description" id="" cols="30"
-                                rows="10"></textarea>
 
+                            <textarea required id="template-description" class="hide"
+                                name="template_description"></textarea>
+
+                        </div>
+                        <div style="width: 100%; ">
+                            <label for="">Template Description</label>
+                            <div id="editor" style='height:220px; width:700px' class="bg-white">
+
+                            </div>
                         </div>
                         <input type="hidden" name="edit_id" id="edit-id">
                         <input type="hidden" name="json_file" id="json_file">
@@ -39,78 +45,128 @@
 
 
                     </div>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <div>
-                            <button type="submit" id="" class="btn btn-md btn-dark template-btn">sumbit
-                                Template</button>
 
-                        </div>
+
+
+                    <br>
+                    <div class="d-flex justify-content-end">
+
+                        <button type="submit" id="sumbit-template-btn" class="btn btn-md btn-dark template-btn">sumbit
+                            Template</button>
+
+
 
 
                     </div>
                 </form>
+
             </div>
         </div>
 
 
-        <div class="my-2 d-flex  align-items-start template-container  gap-10" style="width: 100%;">
-            <% data.forEach((data)=>{%>
 
-                <div id="<%= data.template_id %>" class="each-template-container  ">
-
-                    <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
-                        <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
-                        <h3 class="text text-dark title modal-view">
-                            <%= data.template_name %>
-                        </h3>
-                        <p class="description">
-                            <%= data.template_description %>
-
-                        </p>
-                    </div>
-
-
-                </div>
-
-                <% }) %>
-
-
-        </div>
 
     </div>
-    <div class="modal-template flex-direction-column ">
-        <div style="position:relative">
+    <div class="my-2 d-flex  align-items-start template-container  gap-10" style="width: 100%;">
+        <% data.forEach((data)=>{%>
 
+            <div id="<%= data.template_id %>" class="each-template-container  ">
 
-            <div class="modal-header  d-flex justify-content-end">
-                <h3 class="text text-white btn btn-md btn-danger remove-template">Remove</h3>
-                <h3 class="btn btn-md btn-primary edit edit-template">Edit Template</h3>
+                <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
+                    <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
+                    <h3 class="text text-dark title modal-view">
+                        <%= data.template_name %>
+                    </h3>
+                    <div class="hide description">
+                        <%- data.template_description %>
 
-
-                <h3 class="btn btn-md btn-primary close">Close</h3>
+                    </div>
+                </div>
 
 
             </div>
-            <div class="modal-content">
 
-                <div class="modal-body d-flex  align-items-start gap-10">
-                    <div>
-                        <img class="modal-template-image" width="100%" src="" alt="">
-                    </div>
-                    <div style="width:800px;" class="">
+            <% }) %>
 
-                        <h2 class=" modal-template-title mt-1">
-                        </h2>
-                        <p class="modal-template-description">
 
-                        </p>
-                    </div>
+    </div>
+    <div class="modal-template">
+        <div class="modal-header  d-flex justify-content-end">
+            <h3 class="text text-white btn btn-md btn-danger remove-template">Remove</h3>
+            <h3 class="btn btn-md btn-primary edit edit-template-btn">Edit Template</h3>
+            <h3 class="btn btn-md btn-primary close">Close</h3>
+        </div>
+        <div class="modal-content">
+
+            <div class="modal-content d-flex align-items-center flex-direction-column">
+
+                <div class="img-container">
+                    <img class="modal-template-image" src="" alt="">
                 </div>
+
+
+
+            </div>
+
+            <div class="d-flex flex-direction-column justify-content-start align-items-start template-details px-1">
+                <h2 class=" modal-template-title mt-1">
+                </h2>
+                <div class="modal-template-description">
+
+                </div>
+                <input type="hidden" class="modal-id">
+
             </div>
         </div>
     </div>
+    <script src="javascript/quill.js"></script>
+
+
     <script>
+
+        var toolbarOptions = [
+            ['link', 'image', 'video'],
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote'],
+            // ['code-block'],
+
+            // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            // [{ 'direction': 'rtl' }],                         // text direction
+
+            // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            // [{ 'font': [] }],
+            // [{ 'align': [] }],
+
+
+            ['clean']                                         // remove formatting button
+        ];
+
+
+
+        var editor = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: toolbarOptions,
+                },
+            },
+
+
+
+        });
+        document.querySelector('#sumbit-template-btn').addEventListener('click', function (e) {
+
+            document.querySelector('#template-description').value = editor.root.innerHTML;
+        })
+
         document.getElementById("admin-remove").addEventListener("click", () => {
+
 
 
             var xhttp = new XMLHttpRequest();

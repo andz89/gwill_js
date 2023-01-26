@@ -1,13 +1,7 @@
 .template-container {
+    min-height: 500px;
 
-
-
-    .each-template-container {
-
-        p {
-            display: none;
-            white-space: pre-line;
-            white-space: pre-wrap;
-        }
+    .hide {
+        display: none;
     }
 }
