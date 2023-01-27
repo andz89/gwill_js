@@ -13,8 +13,13 @@ const storage = multer.diskStorage({
     cb(null, 'public/images/ci')
   },
   filename: (req, file, cb)=>{
-    let a = file.originalname.replace(/\.[^/.]+$/, "")
-    cb(null,a + '-'+ uuidv4()+ path.extname(file.originalname))
+    if(file){
+      let a = file.originalname.replace(/\.[^/.]+$/, "")
+      cb(null,a + '-'+ uuidv4()+ path.extname(file.originalname))
+    }else{
+      next()
+    }
+ 
   }
 })
 const upload = multer({storage: storage})

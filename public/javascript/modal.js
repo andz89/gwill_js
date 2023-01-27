@@ -32,8 +32,13 @@ class Modal {
   modal_template_each_view(){
     window.addEventListener('click',(e)=>{
       if(e.target.classList.contains("modal-view")){
+
+     
+
         let parent = e.target.parentElement.parentElement;
         let imgSrc = parent.querySelector('.img').src
+
+
 
 
         let title = parent.querySelector('.title').innerText
@@ -48,7 +53,6 @@ class Modal {
         document.querySelector('.modal-id').value = id;
         document.querySelector('.modal-template').style.display ='flex'
 
-
       }
  
     })
@@ -57,27 +61,87 @@ class Modal {
       
     })
 
-    document.querySelector('.edit-template-btn').addEventListener('click', function(e){
-      let parent = e.target.parentElement.parentElement;
-     
-      parent.querySelector('.modal-template-image').src
-  let modal_title =  parent.querySelector('.modal-template-title').innerText
-  let modal_description =  parent.querySelector('.modal-template-description').innerHTML;
-  let modal_id = parent.querySelector('.modal-id').value
+    
+    //edit template
+    if( document.querySelector('.edit-template-btn')){
+      document.querySelector('.edit-template-btn').addEventListener('click', function(e){
+        
+   //delete created temporary element
+   let temp =  document.querySelectorAll('.edit-temporary-element')
+   Array.from(temp).forEach((e)=>{
+     e.remove()
+   })
 
-  document.querySelector('.modal-template').style.display ='none'
+        let parent = e.target.parentElement.parentElement;
+  
+       let src = parent.querySelector('.modal-template-image').src
+    let modal_title =  parent.querySelector('.modal-template-title').innerText
+    let modal_description =  parent.querySelector('.modal-template-description').innerHTML;
+    let modal_id = parent.querySelector('.modal-id').value
+ 
 
-  document.querySelector("#template-form").classList.remove("hide");
-  document.querySelector("#template-form").classList.add("show");
+  
+    let editLabel = document.querySelector('#edit-label')
+    editLabel.innerHTML = `<h3> Editing: ${modal_title} </h3> `
+    
+    document.querySelector('.template-container').style.display = 'none'
+    document.querySelector('.modal-template').style.display ='none'
+  
+    document.querySelector("#template-form").classList.remove("hide");
+    document.querySelector("#template-form").classList.add("show");
+  
+  
+    // document.querySelector("#template-description" ).value = modal_description
+    editor.root.innerHTML = modal_description.trim()
+    document.querySelector("#template-name").value = modal_title
+    document.querySelector("#edit-id").value = modal_id
+
+    
+
+    document.querySelector("#preview-selected-image").src = src
+  
+        
+  
+      })
+    }
+   
 
 
-  // document.querySelector("#template-description" ).value = modal_description
-  editor.root.innerHTML = modal_description
-  document.querySelector("#template-name").value = modal_title
-  document.querySelector("#edit-id").value = modal_id
-      
+    window.addEventListener("click", function(e){
+      if(e.target.classList.contains("modal-view")){
+        let a = document.querySelector(".modal-template-description")
+        let b = a.querySelectorAll('p')
+        let gcash_number ='09951844860'
+        Array.from(b, (e)=>{
+         if(e.innerText === gcash_number){
+          e.innerHTML += '<span class="copy-number edit-temporary-element"> Icon copy </span>'
+          e.innerHTML += `<input style="display:none" class="hide-number edit-temporary-element" value='${gcash_number}' />`
 
+         }
+        })
+      }
+    
+      if(e.target.classList.contains('copy-number')){
+   
+      e.target.innerHTML += '<div class="message-copy edit-temporary-element">Number is copied!</div>'
+          
+      let copyText =  document.querySelector('.hide-number')
+      copyText.select()
+      copyText.setSelectionRange(0, 99999); // For mobile devices
+
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value);
+
+      document.querySelector('.message-copy').style.display = 'inline-block';
+      setTimeout(()=>{
+      document.querySelector('.message-copy').style.display = 'none';
+
+ },3000)
+
+      }
     })
+
+
 }
 }
 export default Modal;

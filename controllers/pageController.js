@@ -10,7 +10,10 @@ exports.home = (req, res) => {
 };
 
 exports.contact_page = (req, res) => {
-  res.render("pages/contact_page");
+  res.render("pages/contact_page",{
+    user_type: req.session.user.user_role,
+  });
+  
 };
 
 
@@ -31,7 +34,7 @@ templates.getAllTemplates().then((data)=>{
 ;
   res.render("pages/templates", {
     data: data,
-
+    user_type: req.session.user.user_role,
     // user_type: req.session.user.user_role,
     // session: req.session.user ? true : false,
   }); 

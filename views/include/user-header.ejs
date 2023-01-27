@@ -25,6 +25,10 @@
         <li>
           <a href="/contact-page" class="">Contact Us</a>
         </li>
-
+        <% if(locals.user_type=='admin' ){ %>
+          <li>
+            <a href="/dashboard" class="bg-dark">Dashboard</a>
+          </li>
+          <% } %>
       </ul>
     </nav>

@@ -53,9 +53,12 @@ templates.getAllTemplates().then((data)=>{
 };
 
 exports.add_template = function (req, res) {
-
-  req.body.file = req.file.filename
   let admin = new Admin(req.body);
+  if(req.file){
+    req.body.file = req.file.filename
+  }
+
+
   admin
     .add_template_into_database() //database
     .then(function () {
@@ -67,8 +70,11 @@ exports.add_template = function (req, res) {
     });
 };
 exports.remove = function (req, res){
-  
-  let admin = new Admin();
+  let data= {}
+
+  data.id = req.query.id;
+  console.log(data);
+  let admin = new Admin(data);
   admin
     .remove() //database
     .then(function () {

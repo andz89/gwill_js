@@ -3,8 +3,6 @@
 
         <div class="d-flex justify-content-end">
 
-            <input id="admin-remove" type="submit" class="btn btn-sm btn-danger text text-white"
-                value="removed saved Templates">
 
             <div class="btn btn-sm btn-success" id="display-add-templates-form-btn">+ Add Templates</div>
 
@@ -13,7 +11,7 @@
         <div class="hide" id="template-form">
             <div class=" d-flex justify-content-center bg-light p-1 m-1">
                 <form action="/add-template" method="POST" enctype="multipart/form-data" class="add-templates-form ">
-
+                    <div id="edit-label"></div>
                     <div class="d-flex gap-20 justify-content-between flex-direction-column align-items-start  my-1">
                         <div class="d-flex flex-direction-column align-items-start">
                             <label for="">Template Name</label>
@@ -28,7 +26,7 @@
                         </div>
                         <div style="width: 100%; ">
                             <label for="">Template Description</label>
-                            <div id="editor" style='height:220px; width:700px' class="bg-white">
+                            <div id="editor" style='height:700px; width:700px' class="bg-white">
 
                             </div>
                         </div>
@@ -39,8 +37,10 @@
                         <div class="d-flex flex-direction-column align-items-start custom-file-upload ">
                             <label for=""> Upload canvas image</label>
 
-                            <input required type="file" name="image" accept='image/*' />
-
+                            <input required type="file" name="image" id="display-image" accept='image/*' />
+                            <div class="preview">
+                                <img id="preview-selected-image" width="400" />
+                            </div>
                         </div>
 
 
@@ -70,7 +70,7 @@
     <div class="my-2 d-flex  align-items-start template-container  gap-10" style="width: 100%;">
         <% data.forEach((data)=>{%>
 
-            <div id="<%= data.template_id %>" class="each-template-container  ">
+            <div id="<%= data.template_id %>" class="each-template-container ">
 
                 <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
                     <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
@@ -92,24 +92,22 @@
     </div>
     <div class="modal-template">
         <div class="modal-header  d-flex justify-content-end">
-            <h3 class="text text-white btn btn-md btn-danger remove-template">Remove</h3>
+            <input id="admin-remove" type="submit" class="btn btn-sm btn-danger text text-white"
+                value="removed saved Templates">
+
+
             <h3 class="btn btn-md btn-primary edit edit-template-btn">Edit Template</h3>
             <h3 class="btn btn-md btn-primary close">Close</h3>
         </div>
         <div class="modal-content">
-
-            <div class="modal-content d-flex align-items-center flex-direction-column">
-
+            <div class="modal-body d-flex flex-direction-column ">
                 <div class="img-container">
                     <img class="modal-template-image" src="" alt="">
                 </div>
 
-
-
             </div>
-
-            <div class="d-flex flex-direction-column justify-content-start align-items-start template-details px-1">
-                <h2 class=" modal-template-title mt-1">
+            <div class="d-flex flex-direction-column align-items-start  template-details px-1">
+                <h2 class=" modal-template-title">
                 </h2>
                 <div class="modal-template-description">
 
@@ -118,79 +116,91 @@
 
             </div>
         </div>
-    </div>
-    <script src="javascript/quill.js"></script>
+        <script src="javascript/quill.js"></script>
 
 
-    <script>
+        <script>
 
-        var toolbarOptions = [
-            ['link', 'image', 'video'],
-            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-            ['blockquote'],
-            // ['code-block'],
+            var toolbarOptions = [
+                ['link', 'image'],
+                ['bold', 'italic', 'underline'],        // toggled buttons
+                // ['blockquote'],
+                // ['code-block'],
 
-            // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-            // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-            // [{ 'direction': 'rtl' }],                         // text direction
+                // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                // [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+                // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                // [{ 'direction': 'rtl' }],                         // text direction
 
-            // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-            // [{ 'font': [] }],
-            // [{ 'align': [] }],
-
-
-            ['clean']                                         // remove formatting button
-        ];
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
 
 
+                // ['clean']                                         // remove formatting button
+            ];
 
-        var editor = new Quill('#editor', {
-            theme: 'snow',
-            modules: {
-                toolbar: {
-                    container: toolbarOptions,
+
+
+            var editor = new Quill('#editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: {
+                        container: toolbarOptions,
+                    },
                 },
-            },
 
 
 
-        });
-        document.querySelector('#sumbit-template-btn').addEventListener('click', function (e) {
-
-            document.querySelector('#template-description').value = editor.root.innerHTML;
-        })
-
-        document.getElementById("admin-remove").addEventListener("click", () => {
-
-
-
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = () => {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    // console.log(xhttp.responseText);
-
-                    let element = document.querySelector('.admin-message')
-                    element.innerHTML = xhttp.responseText
-                    element.style.display = 'block'
-                    document.querySelector('.template-container').innerHTML = ''
-                    setTimeout(() => {
-                        element.style.display = 'none'
-
-                    }, 2000)
-
+            });
+            //when submitting templates
+            document.querySelector('#sumbit-template-btn').addEventListener('click', function (e) {
+                if (document.querySelector('#preview-selected-image').src != '') {
+                    document.querySelector('#display-image').removeAttribute('required')
                 }
-            };
-            xhttp.open(
-                "POST",
-                `http://localhost:5000/remove`,
-                true
-            );
-            xhttp.send();
-        });
-    </script>
-    <%- include('../include/footer') %>
+                document.querySelector('#template-description').value = editor.root.innerHTML;
+            })
+
+            document.getElementById("admin-remove").addEventListener("click", () => {
+
+                let id = document.querySelector('.modal-id').value
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = () => {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                        let parent = document.querySelector('.template-container')
+                        let template_id = parent.querySelectorAll('.each-template-container')
+                        Array.from(template_id, (each_id) => {
+                            if (each_id.id === id) {
+                                each_id.remove()
+                            }
+                        })
+                        let element = document.querySelector('.admin-message')
+                        element.innerHTML = xhttp.responseText
+                        element.style.display = 'block'
+
+
+
+                        document.querySelector('.modal-template').style.display = 'none'
+
+                        setTimeout(() => {
+                            element.style.display = 'none'
+
+                        }, 2000)
+
+                    }
+                };
+                xhttp.open(
+                    "POST",
+                    `http://localhost:5000/remove?id=${id}`,
+                    true
+                );
+                xhttp.send();
+            });
+        </script>
+        <%- include('../include/footer') %>
