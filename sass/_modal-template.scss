@@ -17,22 +17,26 @@
     padding: 1px 5px;
     background-color: #000;
     color: #fff;
-    border-radius: 8px 8px 8px 0px;
+    border-radius: 10px 10px 10px 0px;
     margin-left: 5px;
     margin-top: -15px;
     display: none;
-    width: 165px;
+    width: 157px;
     position: absolute;
-    ;
-    // font-size: 16px;
   }
 
-  .hide {
-    // display: none;
+
+
+
+  .copy-number:active {
+    transform: translateY(2px);
   }
+
+
+
 
   .modal-content {
-    margin: 0 auto 80px;
+    margin: 0 auto 0px;
     width: 100%;
     animation-name: modalopen;
 

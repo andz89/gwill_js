@@ -1,8 +1,16 @@
 .template-container {
     min-height: 500px;
-
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
     .hide {
         display: none;
     }
+
+    ;
+
+    .copy-number {}
 }

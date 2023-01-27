@@ -32,7 +32,7 @@ class Modal {
   modal_template_each_view(){
     window.addEventListener('click',(e)=>{
       if(e.target.classList.contains("modal-view")){
-
+        document.body.style.overflow = 'hidden'
      
 
         let parent = e.target.parentElement.parentElement;
@@ -56,16 +56,17 @@ class Modal {
       }
  
     })
+    //close ---------------->
     document.querySelector('.close').addEventListener('click', function(){
       document.querySelector('.modal-template').style.display ='none'
-      
+      document.body.style.overflow = 'auto'
     })
 
     
-    //edit template
+    //edit template --------------------------->
     if( document.querySelector('.edit-template-btn')){
       document.querySelector('.edit-template-btn').addEventListener('click', function(e){
-        
+
    //delete created temporary element
    let temp =  document.querySelectorAll('.edit-temporary-element')
    Array.from(temp).forEach((e)=>{
@@ -106,7 +107,7 @@ class Modal {
     }
    
 
-
+//add icon and element to template description
     window.addEventListener("click", function(e){
       if(e.target.classList.contains("modal-view")){
         let a = document.querySelector(".modal-template-description")
@@ -114,17 +115,20 @@ class Modal {
         let gcash_number ='09951844860'
         Array.from(b, (e)=>{
          if(e.innerText === gcash_number){
-          e.innerHTML += '<span class="copy-number edit-temporary-element"> Icon copy </span>'
+          
+          e.innerHTML += '  <img src="images/copy.png" class="copy-number edit-temporary-element" width="20" alt=""  />'
           e.innerHTML += `<input style="display:none" class="hide-number edit-temporary-element" value='${gcash_number}' />`
+          e.innerHTML +=  '<div class="message-copy edit-temporary-element">Number is copied!</div>'
 
+         }
+         if(e.innerText === 'Qr Code:'){
+          e.innerHTML += '<br><img src="images/gcash.jpg" class=" edit-temporary-element" width="200" alt=""  />'
          }
         })
       }
     
       if(e.target.classList.contains('copy-number')){
-   
-      e.target.innerHTML += '<div class="message-copy edit-temporary-element">Number is copied!</div>'
-          
+     
       let copyText =  document.querySelector('.hide-number')
       copyText.select()
       copyText.setSelectionRange(0, 99999); // For mobile devices

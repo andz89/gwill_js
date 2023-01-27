@@ -3,13 +3,13 @@
         <h2>We Layout and you print!</h2>
 
 
-        <div class="my-2 d-flex  align-items-start template-container  gap-10" style="width: 100%;">
+        <div class="template-container" style="width: 100%;">
             <% data.forEach((data)=>{%>
 
                 <div id="<%= data.template_id %>" class="each-template-container  ">
 
                     <div class="hover-opactiy d-flex  justify-content-center flex-direction-column">
-                        <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="370" alt="">
+                        <img src="images/ci/<%= data.canvas_image %>" class="img modal-view" width="270" alt="">
                         <input type="hidden" class="modal-id">
                         <h3 class="text text-dark title modal-view">
                             <%= data.template_name %>
@@ -43,7 +43,7 @@
                 </div>
 
             </div>
-            <div class="d-flex flex-direction-column align-items-start  template-details px-1">
+            <div class="d-flex flex-direction-column align-items-start bg-white template-details p-1">
                 <h2 class=" modal-template-title">
                 </h2>
                 <div class="modal-template-description">
