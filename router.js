@@ -8,6 +8,8 @@ const middleware = require("./middleware/role");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const path = require('path')
+
+
 const storage = multer.diskStorage({
   destination: (req, file, cb)=>{
     cb(null, 'public/images/ci')
@@ -52,10 +54,12 @@ router.get(
 router.get("/dashboard", middleware.role_admin, adminController.dashboard);
 router.get("/admin-login", middleware.role_guest, adminController.login_page);
 router.get("/admin-templates", middleware.role_admin, adminController.templates);
+router.get("/admin-contact", middleware.role_admin, adminController.contact);
 
 //user admin action
 router.post("/admin-login-request", adminController.admin_login_post);
 router.post("/add-template",upload.single('image') ,adminController.add_template);
+router.post("/update_contact", adminController.update_contact);
 router.post("/remove" ,adminController.remove);
 
 

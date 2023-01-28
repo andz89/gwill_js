@@ -42,7 +42,7 @@ exports.templates = (req, res) => {
 
   let templates = new Page()
 templates.getAllTemplates().then((data)=>{
-;
+
   res.render("admin/admin-templates", {
     data: data,
     user_type: req.session.user.user_role,
@@ -50,6 +50,40 @@ templates.getAllTemplates().then((data)=>{
   }); 
 })
   
+};
+exports.contact = function(req, res){
+  let contact = new Admin()
+contact.getContact().then((data)=>{
+ 
+  res.render("admin/admin-contact", {
+    phone_number: data[0].phone_number,
+    email: data[0].email,
+    facebook: data[0].facebook_page,
+    address: data[0].address,
+    user_type: req.session.user.user_role,
+    session: req.session.user ? true : false,
+  }); 
+})
+}
+
+exports.update_contact = function (req, res) {
+  let data = {};
+  data.phone_number = req.query.phone_number;
+  data.email = req.query.email;
+  data.facebook_page = req.query.facebook_page;
+  data.address = req.query.address;
+
+
+ 
+  let user = new Admin(data);
+  user
+    .update_contact()
+    .then(function () {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 };
 
 exports.add_template = function (req, res) {
@@ -73,7 +107,7 @@ exports.remove = function (req, res){
   let data= {}
 
   data.id = req.query.id;
-  console.log(data);
+
   let admin = new Admin(data);
   admin
     .remove() //database
@@ -86,8 +120,3 @@ exports.remove = function (req, res){
       res.send(err);
     });
 }
-// exports.logout = function (req, res) {
-//   req.session.destroy(() => {
-//     res.redirect("/");
-//   });
-// };

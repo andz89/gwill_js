@@ -7,6 +7,8 @@ exports.role_admin = (req, res, next) => {
   }
 };
 exports.role_user = (req, res, next) => {
+  
+
   if (
     (req.session.user && "user" == req.session.user.user_role) ||
     (req.session.user && "admin" == req.session.user.user_role)
@@ -24,12 +26,7 @@ exports.role_guest = (req, res, next) => {
   }
 };
 exports.home_role = (req, res, next) => {
-  if (
-    (req.session.user && "user" == req.session.user.user_role) ||
-    (req.session.user && "admin" == req.session.user.user_role)
-  ) {
+
     next();
-  } else {
-    res.render("pages/landing-page");
-  }
+
 };

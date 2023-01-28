@@ -10,7 +10,12 @@
           <div class="line3"></div>
         </div>
       </label>
-      <label class="text text-white title">Quirktool</label>
+      <label class="text text-white title">
+
+
+        <%= site_name %>
+
+      </label>
 
 
       <ul>
@@ -25,7 +30,7 @@
         <li>
           <a href="/contact-page" class="">Contact Us</a>
         </li>
-        <% if(locals.user_type=='admin' ){ %>
+        <% if(locals.session ){ %>
           <li>
             <a href="/dashboard" class="bg-dark">Dashboard</a>
           </li>

@@ -56,16 +56,20 @@ class Modal {
       }
  
     })
-    //close ---------------->
-    document.querySelector('.close').addEventListener('click', function(){
-      document.querySelector('.modal-template').style.display ='none'
-      document.body.style.overflow = 'auto'
-    })
+    if(document.querySelector('.close')){
+   //close ---------------->
+   document.querySelector('.close').addEventListener('click', function(){
+    document.querySelector('.modal-template').style.display ='none'
+    document.body.style.overflow = 'auto'
+  })
+    }
+ 
 
     
     //edit template --------------------------->
     if( document.querySelector('.edit-template-btn')){
       document.querySelector('.edit-template-btn').addEventListener('click', function(e){
+        document.body.style.overflow = 'auto'
 
    //delete created temporary element
    let temp =  document.querySelectorAll('.edit-temporary-element')
